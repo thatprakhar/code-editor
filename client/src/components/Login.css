@@ -1,0 +1,31 @@
+.Login {
+  background-color: rgb(38, 39, 46);
+  height: 100%;
+}
+
+.login-window {
+  margin: auto;
+  text-align: center;
+  padding-top: 300px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+  margin-bottom: 50px;
+  font-size: 28px;
+}
+
+.input-usr {
+  border: none;
+  font-size: 28px;
+  height: auto;
+}
+
+.join-btn {
+  margin-top: 28px;
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 22px;
+}
