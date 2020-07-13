@@ -11,15 +11,26 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 var code = "";
+var users = [];
+var count_users = 0;
+
+var user_map = new Map();
 
 io.on("connection", socket => {
-  console.log("New user joined");
+  count_users++;
+  user_map[socket] = count_users;
+  console.log("User " + count_users + " joined");
+  users.push("User " + count_users);
+  io.emit("user-list", users);
   socket.on("change-code", msg => {
     code = msg;
     io.emit("receive-msg", code);
   });
-  socket.on("disconnect", () => {
+
+  socket.on("disconnect", socket => {
     console.log("Client disconnected");
+    users.splice(users.indexOf(user_map[socket]), 1);
+    io.emit("user-list", users);
   });
 });
 

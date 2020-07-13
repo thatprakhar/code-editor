@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import socketIOClient from "socket.io-client";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import "./Editor.css";
 
@@ -8,12 +7,13 @@ require("codemirror/theme/material.css");
 require("codemirror/mode/clike/clike.js");
 require("codemirror/mode/javascript/javascript.js");
 
-const ENDPOINT = "192.168.1.101:9000";
-const socket = socketIOClient(ENDPOINT);
-function Editor() {
+/*const ENDPOINT = "192.168.1.101:9000";
+const socket = socketIOClient(ENDPOINT);*/
+function Editor(props) {
   const [clientCode, setClientCode] = useState("");
   const [serverCode, setServerCode] = useState("");
   const [line, setLine] = useState(1);
+  const socket = props.socket;
   const [ch, setCh] = useState(0);
 
   useEffect(() => {
@@ -46,11 +46,11 @@ function Editor() {
         }
         editor.setCursor({ line: line, ch: ch });
       }}
-      onCursorActivity={(editor, data, value) => {
+      /*onCursorActivity={(editor, data, value) => {
         setLine(editor.getCursor().line);
         setCh(editor.getCursor().ch);
         editor.setCursor({ line: line, ch: ch });
-      }}
+      }}*/
     />
   );
 }
