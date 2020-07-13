@@ -21,6 +21,7 @@ io.on("connection", socket => {
   user_map[socket] = count_users;
   console.log("User " + count_users + " joined");
   users.push("User " + count_users);
+  io.emit("receive-msg", code);
   io.emit("user-list", users);
   socket.on("change-code", msg => {
     code = msg;
