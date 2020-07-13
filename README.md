@@ -10,4 +10,4 @@ Features supported :
 
 
 Known Bugs/Issues : 
-* Cursor gets reseted whenever a change is made by another client (Fixed)
+* Cursor Placement/Movement Issues
