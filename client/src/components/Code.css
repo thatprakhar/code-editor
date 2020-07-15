@@ -6,3 +6,12 @@
   display: flex;
   flex-direction: row;
 }
+
+.Editor {
+  flex: 8;
+  width: 50px;
+}
+
+.Users {
+  flex: 1.5;
+}

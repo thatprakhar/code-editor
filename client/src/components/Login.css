@@ -1,6 +1,6 @@
 .Login {
   background-color: rgb(38, 39, 46);
-  height: 100%;
+  height: 100vw;
 }
 
 .login-window {
@@ -28,4 +28,13 @@
   color: white;
   border: none;
   font-size: 22px;
+}
+
+p {
+  margin: 1px;
+}
+
+.Link {
+  text-decoration: none;
+  color: white;
 }
