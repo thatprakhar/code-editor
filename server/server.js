@@ -35,4 +35,4 @@ io.on("connection", socket => {
   });
 });
 
-server.listen(9000, "192.168.1.101", () => console.log("running on 9000"));
+server.listen(9000, () => console.log("running on 9000"));
