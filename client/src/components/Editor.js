@@ -19,12 +19,13 @@ function Editor(props) {
   function compile() {
     socket.emit("compile");
   }
-
   useEffect(() => {
-    socket.on("receive-msg", data => {
-      setServerCode(data);
-      setClientCode(data);
-    });
+    if (socket != null) {
+      socket.on("receive-msg", data => {
+        setServerCode(data);
+        setClientCode(data);
+      });
+    }
   });
 
   let title = "< MergeCode />";

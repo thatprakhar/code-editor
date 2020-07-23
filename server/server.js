@@ -20,13 +20,16 @@ var count_users = 0;
 var user_map = new Map();
 
 io.on("connection", socket => {
-  count_users++;
-  user_map[socket] = count_users;
-  console.log("User " + count_users + " joined");
-  users.push("User " + count_users);
-  io.emit("receive-msg", code);
-  io.emit("user-list", users);
-
+  socket.on("join", msg => {
+    console.log(msg + " joined");
+    count_users++;
+    console.log(socket.id);
+    user_map[socket.id] = msg;
+    users.push(msg);
+    io.emit("receive-msg", code);
+    io.emit("user-list", users);
+  });
+  console.log("User connected");
   socket.on("change-code", msg => {
     code = msg;
     io.emit("receive-msg", code);
@@ -43,9 +46,9 @@ io.on("connection", socket => {
       .catch(err => console.log(err));
   });
 
-  socket.on("disconnect", socket => {
-    console.log("Client disconnected");
-    users.splice(users.indexOf(user_map[socket]), 1);
+  socket.on("disconnect", () => {
+    console.log(user_map[socket.id] + " disconnected");
+    users.splice(users.indexOf(user_map[socket.id]), 1);
     io.emit("user-list", users);
   });
 });
