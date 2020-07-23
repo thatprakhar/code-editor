@@ -4,7 +4,7 @@ import Users from "./components/Users";
 import socketIOClient from "socket.io-client";
 import "./App.css";
 
-const ENDPOINT = "192.168.1.101:9000";
+const ENDPOINT = "localhost:9000";
 const socket = socketIOClient(ENDPOINT);
 
 function App() {
