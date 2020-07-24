@@ -32,7 +32,7 @@ io.on("connection", socket => {
   console.log("User connected");
   socket.on("change-code", msg => {
     code = msg;
-    io.emit("receive-msg", code);
+    socket.broadcast.emit("receive-msg", code);
     fs.writeFileSync("code.cpp", code);
   });
 
