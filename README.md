@@ -7,6 +7,7 @@ Backend made using ExpressJS, and socket.io
 Features supported : 
 * A common document with real time editing across multiple clients
 * Syntax highlighting for javascript
+* Custom Usernames
 
 
 Known Bugs/Issues : 
