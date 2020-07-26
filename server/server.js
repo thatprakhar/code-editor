@@ -2,12 +2,17 @@ const express = require("express");
 const app = express();
 const http = require("http");
 var socketIo = require("socket.io");
-const index = require("./routes/index");
+const path = require("path");
 const fs = require("fs");
 const { c, cpp, node, python, java } = require("compile-run");
 
-app.use(index);
+
 app.use(express.static(__dirname + "/build"));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    //res.send("server runnnng");
+});
 
 const server = http.createServer(app);
 
@@ -41,9 +46,13 @@ io.on("connection", socket => {
     compile
       .then(res => {
         console.log(res);
-        socket.emit("compile-rec", res.stdout);
+        if (res.stderr !== '') socket.emit("compile-rec", res.stderr);
+	else socket.emit("compile-rec", res.stdout);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+	console.log(err.stderr);
+	socket.emit("compile-rec", err.stderr);      
+      });
   });
 
   socket.on("disconnect", () => {
