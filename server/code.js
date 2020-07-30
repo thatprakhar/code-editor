@@ -1,9 +1,1 @@
-#include <iostream>
-using namespace std;
-
-
-int main() {
-  cout << "Hello World\n";
-  cout << "yo\n";  
-  return 0;  
-}
+console.log("hey");

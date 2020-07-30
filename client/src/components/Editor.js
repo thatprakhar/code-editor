@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import "./Editor.css";
+import "./LanguageSelect";
+import DropdownExampleSelection from "./LanguageSelect";
 
 require("codemirror/lib/codemirror.css");
 require("codemirror/theme/material.css");
 require("codemirror/mode/clike/clike.js");
 require("codemirror/mode/javascript/javascript.js");
 
-/*const ENDPOINT = "192.168.1.101:9000";
-const socket = socketIOClient(ENDPOINT);*/
 function Editor(props) {
+  //return <DropdownExampleSelection />;
   const [clientCode, setClientCode] = useState("");
   const [serverCode, setServerCode] = useState("");
   const [line, setLine] = useState(1);
@@ -34,6 +35,7 @@ function Editor(props) {
     <div className="Editor">
       <nav>
         <h3>{title}</h3>
+        <DropdownExampleSelection className="dropdown" socket={socket} />
         <button
           onClick={compile}
           className="btn btn-default btn-danger compile"
@@ -41,7 +43,6 @@ function Editor(props) {
           Compile
         </button>
       </nav>
-
       <CodeMirror
         value={clientCode}
         options={{

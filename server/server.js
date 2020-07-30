@@ -6,12 +6,11 @@ const path = require("path");
 const fs = require("fs");
 const { c, cpp, node, python, java } = require("compile-run");
 
-
 app.use(express.static(__dirname + "/build"));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    //res.send("server runnnng");
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+  //res.send("server runnnng");
 });
 
 const server = http.createServer(app);
@@ -21,6 +20,7 @@ const io = socketIo(server);
 var code = "";
 var users = [];
 var count_users = 0;
+var curr_lang = "C++";
 
 var user_map = new Map();
 
@@ -38,21 +38,49 @@ io.on("connection", socket => {
   socket.on("change-code", msg => {
     code = msg;
     socket.broadcast.emit("receive-msg", code);
-    fs.writeFileSync("code.cpp", code);
+
+    if (curr_lang == "cpp") {
+      fs.writeFileSync("code.cpp", code);
+    } else if (curr_lang == "js") {
+      fs.writeFileSync("code.js", code);
+    }
   });
 
   socket.on("compile", () => {
-    let compile = cpp.runFile("./code.cpp");
-    compile
-      .then(res => {
-        console.log(res);
-        if (res.stderr !== '') socket.emit("compile-rec", res.stderr);
-	else socket.emit("compile-rec", res.stdout);
-      })
-      .catch(err => {
-	console.log(err.stderr);
-	socket.emit("compile-rec", err.stderr);      
-      });
+    console.log("Lang is " + curr_lang);
+    if (curr_lang == "cpp") {
+      let compile = cpp.runFile("./code.cpp");
+      compile
+        .then(res => {
+          console.log(res);
+          if (res.stderr !== "") socket.emit("compile-rec", res.stderr);
+          else socket.emit("compile-rec", res.stdout);
+        })
+        .catch(err => {
+          console.log(err.stderr);
+          socket.emit("compile-rec", err.stderr);
+        });
+    } else if (curr_lang == "js") {
+      let compile = node.runFile("./code.js");
+      compile
+        .then(res => {
+          console.log(res);
+          if (res.stderr !== "") socket.emit("compile-rec", res.stderr);
+          else socket.emit("compile-rec", res.stdout);
+        })
+        .catch(err => {
+          console.log(err.stderr);
+          socket.emit("compile-rec", err.stderr);
+        });
+    }
+  });
+
+  socket.on("change-lang", lang => {
+    curr_lang = lang;
+    code = "";
+    console.log("Language changed to " + lang);
+    io.emit("receive-msg", code);
+    io.emit("change-lang", lang);
   });
 
   socket.on("disconnect", () => {

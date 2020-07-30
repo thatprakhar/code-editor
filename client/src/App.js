@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import "./App.css";
 
 const ENDPOINT = "http://52.15.58.91:9000";
+
 const socket = socketIOClient(ENDPOINT);
 function App() {
   const [res, setRes] = useState("");
