@@ -1,4 +1,5 @@
 import React from "react";
+import "./Whiteboard.css";
 import DrawableCanvas from "react-drawable-canvas";
 
 export default class Whiteboard extends React.Component {

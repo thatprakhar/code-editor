@@ -10,6 +10,7 @@
     "opentok-react-whiteboard": "^1.7.0",
     "react": "^16.13.1",
     "react-codemirror2": "^7.2.1",
+    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-drawable-canvas": "^1.1.1",
     "react-popup": "^0.10.0",

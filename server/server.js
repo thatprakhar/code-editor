@@ -96,6 +96,13 @@ io.on("connection", socket => {
     io.emit("change-lang", lang);
   });
 
+  socket.on("drawing", data => {
+    io.emit("drawing", data);
+  });
+  socket.on("clear", clear => {
+    io.emit("cleared", clear);
+  });
+
   socket.on("disconnect", () => {
     console.log(user_map[socket.id] + " disconnected");
     users.splice(users.indexOf(user_map[socket.id]), 1);

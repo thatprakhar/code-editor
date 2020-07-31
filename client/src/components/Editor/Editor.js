@@ -4,7 +4,7 @@ import "./Editor.css";
 import "../Whiteboard/Whiteboard";
 import "../LanguageSelect/LanguageSelect";
 import DropdownExampleSelection from "../LanguageSelect/LanguageSelect";
-import Whiteboard from "../Whiteboard/Whiteboard";
+import Whiteboard from "../Whiteboard2/Whiteboard";
 
 require("codemirror/lib/codemirror.css");
 require("codemirror/theme/material.css");
@@ -25,7 +25,6 @@ function Editor(props) {
 
   function toggleWhiteboard() {
     setDisplayWhiteboard(!displayWhiteboard);
-    console.log("Changed to " + displayWhiteboard);
   }
 
   useEffect(() => {
@@ -57,7 +56,7 @@ function Editor(props) {
           Compile
         </button>
       </nav>
-      {displayWhiteboard ? <Whiteboard /> : <span></span>}
+      {displayWhiteboard ? <Whiteboard socket={socket} /> : null}
       <CodeMirror
         value={clientCode}
         options={{
