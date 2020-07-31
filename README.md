@@ -6,10 +6,11 @@ Backend made using ExpressJS, and socket.io
 
 Features supported : 
 * A common document with real time editing across multiple clients
-* Syntax highlighting for javascript and C++
+* Syntax highlighting
 * Code Compilation and Run
 * Whiteboard only for client
 * Custom Usernames
+* Languages supported: C, C++, Python, and Javascript
 
 Features Currently under development :
 * Collaborative Whiteboard
