@@ -1,5 +1,9 @@
 #include <iostream>
+using namespace std;
+
 int main() {
-  std::cout << "Hello\n";
+ // Write your code here
+
+  cout << "nice\n";
   return 0;
-}  
+}

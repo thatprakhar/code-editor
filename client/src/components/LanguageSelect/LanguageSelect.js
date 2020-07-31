@@ -3,7 +3,12 @@ import { Dropdown } from "semantic-ui-react";
 
 const languageOptions = [
   {
-    key: "C++",
+    key: "c",
+    text: "C",
+    value: "c"
+  },
+  {
+    key: "cpp",
     text: "C++",
     value: "cpp"
   },
@@ -11,6 +16,11 @@ const languageOptions = [
     key: "js",
     text: "JavaScript",
     value: "js"
+  },
+  {
+    key: "py",
+    text: "Python",
+    value: "py"
   }
 ];
 

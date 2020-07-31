@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import "./Editor.css";
-import "./Whiteboard";
-import "./LanguageSelect";
-import DropdownExampleSelection from "./LanguageSelect";
-import Whiteboard from "./Whiteboard";
+import "../Whiteboard/Whiteboard";
+import "../LanguageSelect/LanguageSelect";
+import DropdownExampleSelection from "../LanguageSelect/LanguageSelect";
+import Whiteboard from "../Whiteboard/Whiteboard";
 
 require("codemirror/lib/codemirror.css");
 require("codemirror/theme/material.css");
@@ -12,7 +12,6 @@ require("codemirror/mode/clike/clike.js");
 require("codemirror/mode/javascript/javascript.js");
 
 function Editor(props) {
-  //return <DropdownExampleSelection />;
   const [clientCode, setClientCode] = useState("");
   const [serverCode, setServerCode] = useState("");
   const [line, setLine] = useState(1);

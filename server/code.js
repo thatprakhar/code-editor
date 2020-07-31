@@ -1,1 +1,6 @@
-console.log("hey");
+function main() {
+ // Write your code here
+
+}
+
+main()
