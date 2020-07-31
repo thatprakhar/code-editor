@@ -26,12 +26,12 @@ var user_map = new Map();
 
 io.on("connection", socket => {
   socket.on("join", msg => {
-    console.log(msg + " joined");
+    console.log(msg + " : " + socket.id + "  joined");
     count_users++;
-    console.log(socket.id);
     user_map[socket.id] = msg;
     users.push(msg);
     io.emit("receive-msg", code);
+    console.log(users);
     io.emit("user-list", users);
     io.emit("change-lang", curr_lang);
   });
@@ -47,6 +47,8 @@ io.on("connection", socket => {
       fs.writeFileSync("code.c", code);
     } else if (curr_lang == "py") {
       fs.writeFileSync("code.py", code);
+    } else if (curr_lang == "java") {
+      fs.writeFileSync("code.java", code);
     }
   });
 
@@ -61,10 +63,11 @@ io.on("connection", socket => {
       compile = c.runFile("./code.c");
     } else if (curr_lang == "py") {
       compile = python.runFile("./code.py");
+    } else if (curr_lang == "java") {
+      compile = java.runFile("./code.java");
     }
     compile
       .then(res => {
-        console.log(res);
         if (res.stderr !== "") socket.emit("compile-rec", res.stderr);
         else socket.emit("compile-rec", res.stdout);
       })
@@ -90,6 +93,9 @@ io.on("connection", socket => {
     } else if (lang == "py") {
       code = "def main():\n\t# Write your code here\n\n\nmain()";
       fs.writeFileSync("code.py", code);
+    } else if (lang == "java") {
+      code = "";
+      fs.writeFileSync("code.java", code);
     }
     console.log("Language changed to " + lang);
     io.emit("receive-msg", code);
@@ -106,6 +112,7 @@ io.on("connection", socket => {
   socket.on("disconnect", () => {
     console.log(user_map[socket.id] + " disconnected");
     users.splice(users.indexOf(user_map[socket.id]), 1);
+    console.log(users);
     io.emit("user-list", users);
   });
 });
