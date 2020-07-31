@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import "./Editor.css";
+import "./Whiteboard";
 import "./LanguageSelect";
 import DropdownExampleSelection from "./LanguageSelect";
+import Whiteboard from "./Whiteboard";
 
 require("codemirror/lib/codemirror.css");
 require("codemirror/theme/material.css");
@@ -16,10 +18,17 @@ function Editor(props) {
   const [line, setLine] = useState(1);
   const socket = props.socket;
   const [ch, setCh] = useState(0);
+  const [displayWhiteboard, setDisplayWhiteboard] = useState(false);
 
   function compile() {
     socket.emit("compile");
   }
+
+  function toggleWhiteboard() {
+    setDisplayWhiteboard(!displayWhiteboard);
+    console.log("Changed to " + displayWhiteboard);
+  }
+
   useEffect(() => {
     if (socket != null) {
       socket.on("receive-msg", data => {
@@ -35,6 +44,12 @@ function Editor(props) {
     <div className="Editor">
       <nav>
         <h3>{title}</h3>
+        <button
+          onClick={toggleWhiteboard}
+          className="btn btn-default btn-info compile"
+        >
+          Whiteboard
+        </button>
         <DropdownExampleSelection className="dropdown" socket={socket} />
         <button
           onClick={compile}
@@ -43,6 +58,7 @@ function Editor(props) {
           Compile
         </button>
       </nav>
+      {displayWhiteboard ? <Whiteboard /> : <span></span>}
       <CodeMirror
         value={clientCode}
         options={{
