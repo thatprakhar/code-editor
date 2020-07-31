@@ -22,3 +22,6 @@ Known Bugs/Issues :
 
 
 Check it out at http://52.15.58.91:9000/
+
+
+This repo uses whiteboard from https://github.com/joshborup/drawthings.fun/blob/master/src/components/WhiteBoard.js
