@@ -17,6 +17,7 @@ Features Currently under development :
 
 Known Bugs/Issues : 
 * Cursor Placement/Movement Issues
+* Username lists 
 
 
 Check it out at http://52.15.58.91:9000/
